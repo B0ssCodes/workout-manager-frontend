@@ -1,5 +1,6 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import api from '../api'; // Import the axios instance
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -8,27 +9,27 @@ const WorkoutDetails = ({ workout }) => {
     const { dispatch } = useWorkoutsContext()
     const { user } = useAuthContext()
 
-const handleClick = async () => {
-    if(!user){
-        return
-    }
-    
-    const response = await fetch("api/workouts/" + workout._id, {
-        method: "DELETE",
-        headers: {
-            'Authorization': `Bearer ${user.token}`
+    const handleClick = async () => {
+        if(!user){
+            return
         }
-    })
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    } else {
-        const json = await response.json()
-        dispatch({type: 'DELETE_WORKOUT', payload: json})
+        
+        try {
+            const response = await api.delete(`/api/workouts/${workout._id}`, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            } else {
+                dispatch({type: 'DELETE_WORKOUT', payload: response.data})
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
-
-}
-
 
     return (
         <div className="workout-details">

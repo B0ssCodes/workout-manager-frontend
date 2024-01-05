@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import api from '../api'; // Import the axios instance
 
 //components
 import WorkoutDetails from "../components/WorkoutDetails";
@@ -12,15 +13,15 @@ const Home = () => {
 
     useEffect( () => { 
         const fetchWorkouts = async () => {
-            const response = await fetch('/api/workouts', {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            })
-            const json = await response.json()
-
-            if (response.ok) {
-                dispatch({ type: 'SET_WORKOUTS', payload: json })
+            try {
+                const response = await api.get('/api/workouts', {
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                })
+                dispatch({ type: 'SET_WORKOUTS', payload: response.data })
+            } catch (error) {
+                console.error(error);
             }
         }
         if(user){

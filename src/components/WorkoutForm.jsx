@@ -1,10 +1,8 @@
 
 import { useState } from "react"
-
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
-
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import api from '../api'; // Import the axios instance
 
 const WorkoutForm = () => {
     const { dispatch } = useWorkoutsContext()
@@ -16,7 +14,6 @@ const WorkoutForm = () => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -26,28 +23,29 @@ const WorkoutForm = () => {
         }
         const workout = { title, load, reps }
 
-        const response = await fetch("/api/workouts", {
-            method: "POST",
-            body: JSON.stringify(workout),
-            headers: {
-                "Content-Type": "application/json",
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-        const json = await response.json()
+        try {
+            const response = await api.post('/api/workouts', workout, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
 
-        if (!response.ok){
-            setError(json.error)
-            setEmptyFields(json.emptyFields)
-        }
-        if (response.ok){
-            setTitle('')
-            setLoad('')
-            setReps('')
-            setError(null)
-            setEmptyFields([])
-            console.log("New workout added!")
-            dispatch({ type: 'CREATE_WORKOUT', payload: json })
+            if (!response.ok){
+                setError(response.data.error)
+                setEmptyFields(response.data.emptyFields)
+            }
+            if (response.ok){
+                setTitle('')
+                setLoad('')
+                setReps('')
+                setError(null)
+                setEmptyFields([])
+                console.log("New workout added!")
+                dispatch({ type: 'CREATE_WORKOUT', payload: response.data })
+            }
+        } catch (error) {
+            setError(error.message);
         }
     }
     return (
