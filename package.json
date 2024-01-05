@@ -1,5 +1,4 @@
 {
-  "proxy": "https://workout-manager-inc0.onrender.com:10000",
   "name": "frontend",
   "private": true,
   "version": "0.0.0",

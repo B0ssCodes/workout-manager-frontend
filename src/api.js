@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://workout-manager-inc0.onrender.com:10000',
+  baseURL: 'https://workout-manager-inc0.onrender.com',
 });
 
 export default api;
