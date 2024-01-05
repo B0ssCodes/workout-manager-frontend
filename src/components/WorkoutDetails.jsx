@@ -20,12 +20,9 @@ const WorkoutDetails = ({ workout }) => {
                     'Authorization': `Bearer ${user.token}`
                 }
             })
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            } else {
-                dispatch({type: 'DELETE_WORKOUT', payload: response.data})
-            }
+    
+            // No need to check response.ok here
+            dispatch({type: 'DELETE_WORKOUT', payload: response.data})
         } catch (error) {
             console.error(error);
         }

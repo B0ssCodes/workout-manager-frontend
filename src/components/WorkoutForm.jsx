@@ -11,18 +11,18 @@ const WorkoutForm = () => {
     const [title, setTitle] = useState('')
     const [load, setLoad] = useState('')
     const [reps, setReps] = useState('')
-    const [error, setError] = useState(null)
+    const [error, setError] = useState('')
     const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+    
         if(!user){
             setError("You must be logged in to add a workout")
             return
         }
         const workout = { title, load, reps }
-
+    
         try {
             const response = await api.post('/api/workouts', workout, {
                 headers: {
@@ -30,22 +30,24 @@ const WorkoutForm = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             })
-
-            if (!response.ok){
-                setError(response.data.error)
-                setEmptyFields(response.data.emptyFields)
-            }
-            if (response.ok){
-                setTitle('')
-                setLoad('')
-                setReps('')
-                setError(null)
-                setEmptyFields([])
-                console.log("New workout added!")
-                dispatch({ type: 'CREATE_WORKOUT', payload: response.data })
-            }
+    
+            setTitle('')
+            setLoad('')
+            setReps('')
+            setError(null)
+            setEmptyFields([])
+            console.log("New workout added!")
+            dispatch({ type: 'CREATE_WORKOUT', payload: response.data })
         } catch (error) {
-            setError(error.message);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                setError(error.response.data.error)
+                setEmptyFields(error.response.data.emptyFields)
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                setError(error.message);
+            }
         }
     }
     return (
