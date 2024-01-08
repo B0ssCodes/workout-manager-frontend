@@ -27,7 +27,7 @@ export const useSignup = () => {
             }
         } catch (error) {
             setIsLoading(false);
-            setError(error.message);
+            setError(error.response.data.error || error.message);
         }
     }
 

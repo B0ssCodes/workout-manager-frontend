@@ -1,6 +1,8 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
-
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 /* layout */
 :root {
   --primary: #1aac83;
@@ -104,21 +106,21 @@ input.error {
 /* navbar */
 nav {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap; /* This will prevent wrapping onto the next line */
 }
+
 nav a, nav button {
-  margin-left: 10px;
-}
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
   font-family: "Poppins";
-  cursor: pointer;
+  background-color: var(--primary);
+  padding: 0.4em;
+  border-radius: 40px;
   font-size: 1em;
-  margin-left: 10px;
+  margin-left: 0.5em;
+  margin-right: 0.5em;  
 }
 
 /* auth forms */

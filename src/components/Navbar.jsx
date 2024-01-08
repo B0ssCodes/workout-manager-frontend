@@ -17,7 +17,7 @@ const handleClick = () => {
                 </Link>
                 <nav>
                     {user && (
-                    <div>
+                    <div className='bg-red-300'>
                         <span>{user.email}</span>
                     <button onClick={handleClick}>Log Out</button>
                     </div>
