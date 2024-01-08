@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import  Backdrop  from './Backdrop';
 
 import api from '../api'; // Import the axios instance
@@ -86,10 +86,10 @@ const WorkoutForm = ({ handleClose }) => {
             animate="visible"
             
 >
-        <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New Workout</h3>
+        <form className="create-form" onSubmit={handleSubmit}>
+            <h2>Add a New Workout</h2>
             <label>Exercise Title:</label>
-            <input 
+            <motion.input 
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
@@ -113,7 +113,10 @@ const WorkoutForm = ({ handleClose }) => {
             value={reps}
             className={emptyFields.includes('reps') ? 'error' : ''}
             />
-            <button>Add Workout</button>
+            <motion.button
+            whileHover={{ scale: 1.05, transition: {duration: 0.3} }}
+            whileTap={{ scale: 0.9 }}
+            >Add Workout</motion.button>
             {error && <div className="error">{error}</div>}
         </form>
         </motion.div>
