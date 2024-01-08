@@ -1,5 +1,6 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { motion } from "framer-motion";
 import api from '../api'; // Import the axios instance
 
 //date fns
@@ -34,7 +35,11 @@ const WorkoutDetails = ({ workout }) => {
             <p><strong>Load (kg): </strong>{workout.load}</p>
             <p><strong>Reps: </strong>{workout.reps}</p>
             <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
-            <span className= "material-symbols-outlined" onClick={handleClick}>delete</span>
+            <motion.span 
+            className= "material-symbols-outlined" 
+            onClick={handleClick}
+            whileHover={{scaleX: 1.2, scaleY: 1.2, transition: {duration: 0.2} }}>
+            delete</motion.span>
         </div>
     )
 }

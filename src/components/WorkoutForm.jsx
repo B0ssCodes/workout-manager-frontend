@@ -2,9 +2,12 @@
 import { useState } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { motion} from "framer-motion";
+import  Backdrop  from './Backdrop';
+
 import api from '../api'; // Import the axios instance
 
-const WorkoutForm = () => {
+const WorkoutForm = ({ handleClose }) => {
     const { dispatch } = useWorkoutsContext()
     const { user } = useAuthContext()
 
@@ -38,6 +41,8 @@ const WorkoutForm = () => {
             setEmptyFields([])
             console.log("New workout added!")
             dispatch({ type: 'CREATE_WORKOUT', payload: response.data })
+            handleClose()
+
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -50,7 +55,37 @@ const WorkoutForm = () => {
             }
         }
     }
+    const dropIn = {
+        hidden: {
+            y: '-100vh',
+            opacity: 0
+        },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.1,
+                type: "spring",
+                damping: 25,
+                stiffness: 500,
+            },
+        },
+        exit: {
+            y: '-100vh',
+            opacity: 0,
+        }
+    }
     return (
+        <>
+        <Backdrop onClick={handleClose} >
+            <motion.div 
+            onClick={(e) => e.stopPropagation()}
+            className="workout-form-motion"
+            variants={dropIn}
+            initial="hidden"
+            animate="visible"
+            
+>
         <div className="workoutForm">
         <form className="create" onSubmit={handleSubmit}>
             <h3>Add a New Workout</h3>
@@ -83,6 +118,9 @@ const WorkoutForm = () => {
             {error && <div className="error">{error}</div>}
         </form>
         </div>
+        </motion.div>
+        </Backdrop>
+        </>
     )
 }
 
