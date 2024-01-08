@@ -40,6 +40,7 @@ header a {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
+  border-radius: 1rem;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
@@ -63,6 +64,18 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
+}
+
+.material-symbols-outlined.edit 
+{
+  top: 20px;
+  right: 20px;
+}
+
+.material-symbols-outlined.delete 
+{
+  top: 90px;
+  right: 20px;
 }
 
 /* new workout form */

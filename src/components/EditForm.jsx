@@ -7,13 +7,13 @@ import  Backdrop  from './Backdrop';
 
 import api from '../api'; // Import the axios instance
 
-const WorkoutForm = ({ handleClose }) => {
+const EditForm = ({ editOpen, handleClose, workout }) => {
     const { dispatch } = useWorkoutsContext()
     const { user } = useAuthContext()
 
-    const [title, setTitle] = useState('')
-    const [load, setLoad] = useState('')
-    const [reps, setReps] = useState('')
+    const [title, setTitle] = useState(workout.title)
+    const [load, setLoad] = useState(workout.load)
+    const [reps, setReps] = useState(workout.reps)
     const [error, setError] = useState('')
     const [emptyFields, setEmptyFields] = useState([])
 
@@ -21,26 +21,24 @@ const WorkoutForm = ({ handleClose }) => {
         e.preventDefault()
     
         if(!user){
-            setError("You must be logged in to add a workout")
+            setError("You must be logged in to edit a workout")
             return
         }
-        const workout = { title, load, reps }
-    
+        const workoutToUpdate = { _id: workout._id, title, load, reps }    
         try {
-            const response = await api.post('/api/workouts', workout, {
+            const response = await api.patch(`/api/workouts/${workoutToUpdate._id}`, workoutToUpdate, {
                 headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${user.token}`
+                  "Content-Type": "application/json",
+                  'Authorization': `Bearer ${user.token}`
                 }
-            })
-    
+              })
             setTitle('')
             setLoad('')
             setReps('')
             setError(null)
             setEmptyFields([])
-            console.log("New workout added!")
-            dispatch({ type: 'CREATE_WORKOUT', payload: response.data })
+            console.log("Workout Edited!")
+            dispatch({ type: 'UPDATE_WORKOUT', payload: response.data })
             handleClose()
 
         } catch (error) {
@@ -87,7 +85,7 @@ const WorkoutForm = ({ handleClose }) => {
             
 >
         <form className="create-form" onSubmit={handleSubmit}>
-            <h2>Add a New Workout</h2>
+            <h2>Edit a Workout</h2>
             <label>Exercise Title:</label>
             <motion.input 
             type="text"
@@ -113,7 +111,10 @@ const WorkoutForm = ({ handleClose }) => {
             value={reps}
             className={emptyFields.includes('reps') ? 'error' : ''}
             />
-            <motion.button>Add Workout</motion.button>
+            <motion.button
+            whileHover={{ scale: 1.05, transition: {duration: 0.3} }}
+            whileTap={{ scale: 0.9 }}
+            >Edit Workout</motion.button>
             {error && <div className="error">{error}</div>}
         </form>
         </motion.div>
@@ -122,4 +123,4 @@ const WorkoutForm = ({ handleClose }) => {
     )
 }
 
-export default WorkoutForm
+export default EditForm
