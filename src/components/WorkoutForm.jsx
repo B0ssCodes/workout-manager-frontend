@@ -86,7 +86,6 @@ const WorkoutForm = ({ handleClose }) => {
             animate="visible"
             
 >
-        <div className="workoutForm">
         <form className="create" onSubmit={handleSubmit}>
             <h3>Add a New Workout</h3>
             <label>Exercise Title:</label>
@@ -117,7 +116,6 @@ const WorkoutForm = ({ handleClose }) => {
             <button>Add Workout</button>
             {error && <div className="error">{error}</div>}
         </form>
-        </div>
         </motion.div>
         </Backdrop>
         </>
