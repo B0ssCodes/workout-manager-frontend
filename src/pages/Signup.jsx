@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import './workouts.css'
 
 const Signup = () => {
 

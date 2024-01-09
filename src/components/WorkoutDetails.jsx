@@ -37,27 +37,48 @@ const WorkoutDetails = ({ workout }) => {
     }
 
     return (
-        <div className="workout-details">
-            <h4>{workout.title}</h4>
-            <p><strong>Load (kg): </strong>{workout.load}</p>
-            <p><strong>Reps: </strong>{workout.reps}</p>
-            <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
+        <div className="card my-5" >
+            
+           
+            <div class="card" >
+         
+            <div class="card-body">
+          <h5 class="card-title">{workout.title}</h5>
+         
+         </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">Load (kg): {workout.load}</li>
+            <li class="list-group-item">Reps: {workout.reps}</li>
+            
+            </ul>
+            <div class="card-body">
+                <span className="card-link me-5">
             <motion.span 
             className= "material-symbols-outlined edit" 
             onClick={() => (editOpen ? closeEdit() : openEdit())}
             whileHover={{scale: 1.1 }}>
             edit</motion.span>
+            </span>
             <AnimatePresence 
             initial={false}
             mode='wait'
             onExitComplete={() => null}>
             {editOpen && <EditForm editOpen={editOpen} handleClose={closeEdit} workout={workout}/>}
             </AnimatePresence>
+            <span className="card-link ms-5">
             <motion.span 
             className= "material-symbols-outlined delete" 
             onClick={handleDeleteClick}
             whileHover={{scale: 1.1 }}>
             delete</motion.span>
+            </span>
+  </div>
+</div>
+<div class="card-footer text-body-secondary">
+{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
+  </div>
+           
+            
             
         </div>
     )
