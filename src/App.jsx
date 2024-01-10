@@ -14,7 +14,7 @@ function App() {
   const {user} = useAuthContext()
 
   return (
-    <div data-bs-theme="dark">
+    <div>
       <BrowserRouter>
       <Navbar />
        <div className="pages">

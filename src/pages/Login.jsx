@@ -23,41 +23,46 @@ const Login = () => {
     }
 
     return (
-        <form className="login" onSubmit={handleSubmit} >
-            <h3>Log In</h3>
+        <>
+        
+        <h1 className="display-1 text-center mb-5">Log In</h1>
 
-            <label>Email:</label>
-            <div className="password-input">
-            <input 
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            />
-            <motion.span className="material-symbols-outlined hidden"
-            onClick= {togglePasswordVisibility}
-            whileHover={{scale: 1.1}}>
-            {passwordVisible ? "visibility" : "visibility_off"}
-            </motion.span>
-            </div>
+<div className="container-sm justify-content-center bg-altDark py-4 shadow-color">
+    <div className="row justify-content-center">
 
-            <label>Password:</label>
-            <div className="password-input">
-            <input 
-            type={passwordVisible ? "text" : "password"}
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            />
-            <motion.span className="material-symbols-outlined"
-            onClick= {togglePasswordVisibility}
-            whileHover={{scale: 1.1}}>
-            {passwordVisible ? "visibility" : "visibility_off"}
-            </motion.span>
-            </div>
-        <button disabled={isLoading}>Log In</button>
-        <div id="signup-text">Don't have an account?</div>
-        <Link id="signup-button" to="/signup">Sign Up</Link>
-        {error && <div className = "error">{error}</div>}
-        </form>
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6">
+<form className="" onSubmit={handleSubmit}>
+<div className="mb-3">
+  <label for="exampleInputEmail1" className="form-label">Email address</label>
+  <input type="email" className="form-control" 
+  id="exampleInputEmail1"
+   aria-describedby="emailHelp" 
+   value={email}
+   onChange={(e) => setEmail(e.target.value)}
+   />
+  <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+</div>
+<div className="mb-3">
+  <label for="exampleInputPassword1" className="form-label">Password</label>
+  <input type={passwordVisible ? "text" : "password"} 
+  className="form-control" 
+  id="exampleInputPassword1"
+  onChange={(e) => setPassword(e.target.value)}
+value={password} />
+</div>
+
+
+<div className="mb-3 form-check">
+  <input type="checkbox" className="form-check-input" id="exampleCheck1" onClick= {togglePasswordVisibility} />
+  <label className="form-check-label" for="exampleCheck1">Show Password</label>
+</div>
+<button type="submit" className="btn btn-primary" disabled={isLoading} >Log In</button>
+{error && <div className = "error">{error}</div>}
+</form>
+</div>
+</div>
+</div>
+</>
     )
 }
 export default Login;

@@ -42,10 +42,14 @@ const handleClick = () => {
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
         <button className="btn btn-outline-success me-3" type="submit">Search</button>
       </form>
-      <div className="nav-item btn btn-primary mt-3 mt-lg-0"
+      {user &&(<div className="nav-item btn btn-primary mt-3 mt-lg-0"
       onClick={handleClick}>
           Logout
-        </div>
+        </div>)}
+        {!user &&(<Link className="nav-item btn btn-primary mt-3 mt-lg-0"
+          to="/login">
+          Login
+        </Link>)}
     </div>
   </div>
 </nav>

@@ -215,3 +215,6 @@ span.material-symbols-outlined.hidden{
   align-items: center;
 }
 
+.shadow-color {
+  box-shadow: 0 0 30px 10px #006400; /* DarkGreen */
+}
