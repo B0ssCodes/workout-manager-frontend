@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import api from '../api'; // Import the axios instance
 import EditForm from "./EditForm";
 import { useState } from "react";
+import { BiPencil, BiTrash } from 'react-icons/bi';
+
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
@@ -53,11 +55,13 @@ const WorkoutDetails = ({ workout }) => {
             </ul>
             <div className="card-body">
                 <span className="card-link me-5">
-            <motion.span 
-            className= "material-symbols-outlined edit" 
-            onClick={() => (editOpen ? closeEdit() : openEdit())}
-            whileHover={{scale: 1.1 }}>
-            edit</motion.span>
+                <motion.span 
+                className= "material-symbols-outlined edit" 
+                 onClick={() => (editOpen ? closeEdit() : openEdit())}
+                whileHover={{scale: 1.1 }}>
+                <BiPencil size={25}/>
+                </motion.span>
+
             </span>
             <AnimatePresence 
             initial={false}
@@ -70,16 +74,14 @@ const WorkoutDetails = ({ workout }) => {
             className= "material-symbols-outlined delete" 
             onClick={handleDeleteClick}
             whileHover={{scale: 1.1 }}>
-            delete</motion.span>
+            <BiTrash size={25}/>
+            </motion.span>
             </span>
   </div>
 </div>
 <div className="card-footer text-body-secondary">
 {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
-  </div>
-           
-            
-            
+  </div>       
         </div>
     )
 }

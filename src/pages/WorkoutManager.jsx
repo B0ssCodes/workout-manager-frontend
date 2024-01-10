@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Loading from "../components/Loading";
 import api from '../api'; // Import the axios instance
 import './workouts.css'
 
@@ -12,7 +13,7 @@ import WorkoutForm from "../components/WorkoutForm";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 const WorkoutManager = () => {
-   const {workouts, dispatch} = useWorkoutsContext()
+   const {workouts, dispatch, isLoading} = useWorkoutsContext()
    const [modalOpen, setModalOpen] = useState(false)
 
 
@@ -45,7 +46,8 @@ const WorkoutManager = () => {
 
 
     return (
-       
+        <>
+        {isLoading && <Loading />}
         <div className="home gradient-background">
             
     
@@ -69,6 +71,7 @@ const WorkoutManager = () => {
                 ))}
             </div>
         </div>
+        </>
     )
 }
 export default WorkoutManager

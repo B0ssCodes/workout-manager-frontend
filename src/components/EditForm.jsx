@@ -4,6 +4,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { motion } from "framer-motion";
 import  Backdrop  from './Backdrop';
+import './components.css'
 
 import api from '../api'; // Import the axios instance
 
@@ -85,36 +86,38 @@ const EditForm = ({ editOpen, handleClose, workout }) => {
             
 >
         <form className="create-form" onSubmit={handleSubmit}>
-            <h2>Edit a Workout</h2>
-            <label>Exercise Title:</label>
+            <h2 className="display-4">Edit a Workout</h2>
+            <label className="form-label">Exercise Title:</label>
             <motion.input 
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
-            className={emptyFields.includes('title') ? 'error' : ''}
-            />
+            className="form-control"  
+            required />
+            
 
             
-            <label>Load (in kg):</label>
+            <label className="form-label">Load (in kg):</label>
             <input 
             type="number"
             onChange={(e) => setLoad(e.target.value)}
             value={load}
-            className={emptyFields.includes('load') ? 'error' : ''}
-            />
+            className="form-control"    
+            required/>
 
            
-            <label>Reps:</label>
+            <label className="form-label">Reps:</label>
             <input 
             type="number"
             onChange={(e) => setReps(e.target.value)}
             value={reps}
-            className={emptyFields.includes('reps') ? 'error' : ''}
-            />
+            className="form-control"
+            required/>
             <motion.button
             whileHover={{ scale: 1.05, transition: {duration: 0.3} }}
             whileTap={{ scale: 0.9 }}
-            className="btn btn-primary"
+            className="btn btn-primary mt-2"
+            style={{ transform: 'scale(1)' }}
             >Edit Workout</motion.button>
             {error && <div className="error">{error}</div>}
         </form>

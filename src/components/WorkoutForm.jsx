@@ -87,14 +87,14 @@ const WorkoutForm = ({ handleClose }) => {
             
 >
         <form className="create-form" onSubmit={handleSubmit}>
-            <h2>Add a New Workout</h2>
+            <h2 className="display-4">Add a New Workout</h2>
             <label>Exercise Title:</label>
             <motion.input 
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
-            className={emptyFields.includes('title') ? 'error' : ''}
-            />
+            className="form-control"
+            required/>
 
             
             <label>Load (in kg):</label>
@@ -102,17 +102,17 @@ const WorkoutForm = ({ handleClose }) => {
             type="number"
             onChange={(e) => setLoad(e.target.value)}
             value={load}
-            className={emptyFields.includes('load') ? 'error' : ''}
-            />
+            className="form-control"
+            required />
 
            
-            <label>Reps:</label>
+            <label className="form-label">Reps:</label>
             <input 
             type="number"
             onChange={(e) => setReps(e.target.value)}
             value={reps}
-            className={emptyFields.includes('reps') ? 'error' : ''}
-            />
+            className="form-control"
+            required/>
             <motion.button className="btn btn-primary">Add Workout</motion.button>
             {error && <div className="error">{error}</div>}
         </form>

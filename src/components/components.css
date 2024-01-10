@@ -1,0 +1,19 @@
+.formInputError{
+    border: 1px solid red;
+    background-color: #ffcccc;
+}
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .dumbell-svg {
+    animation: spin 2s cubic-bezier(0.25, 0, 0.25, 1) infinite;
+    fill: #fff;
+    width: 10rem;
+  }

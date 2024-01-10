@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Loading from "../components/Loading";
 import './workouts.css'
 
 const Signup = () => {
@@ -48,10 +49,8 @@ const Signup = () => {
 
     return (
       <>
-        
-
-
-  <div className="loginBody">
+      {isLoading &&<Loading />}
+  <div className="container-sm">
   
   <h1 className="display-1 text-center my-5">Sign Up</h1>
 
@@ -68,6 +67,7 @@ id="firstName"
 aria-describedby="firstName" 
 value={firstName}
 onChange={(e) => setFirstName(e.target.value)}
+required
 />
 </div>
 
@@ -80,6 +80,7 @@ id="lastName"
 aria-describedby="laastName" 
 value={lastName}
 onChange={(e) => setLastName(e.target.value)}
+required
 />
 <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
 </div>
@@ -93,6 +94,7 @@ id="email"
 aria-describedby="emailHelp" 
 value={email}
 onChange={(e) => setEmail(e.target.value)}
+required
 />
 <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
 </div>
@@ -102,7 +104,9 @@ onChange={(e) => setEmail(e.target.value)}
 className="form-control" 
 id="password"
 onChange={handlePasswordChange}
-value={password} />
+value={password} 
+required/>
+
 </div>
 
 <div className="mb-3">
@@ -111,7 +115,8 @@ value={password} />
 className="form-control" 
 id="confirmPassword"
 onChange={handlePasswordConfirmChange}
-value={passwordConfirm} />
+value={passwordConfirm} 
+requred/>
 </div>
 
 <div className="mb-3 form-check d-flex">
