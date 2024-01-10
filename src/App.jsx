@@ -28,7 +28,7 @@ function App() {
           path="/workout-manager"
           element={user ? <WorkoutManager /> : <Navigate to="/login"/>}
           />
-
+          
           <Route 
           path="/login"
           element={!user ? <Login /> : <Navigate to="/workout-manager"/>}

@@ -114,6 +114,7 @@ const EditForm = ({ editOpen, handleClose, workout }) => {
             <motion.button
             whileHover={{ scale: 1.05, transition: {duration: 0.3} }}
             whileTap={{ scale: 0.9 }}
+            className="btn btn-primary"
             >Edit Workout</motion.button>
             {error && <div className="error">{error}</div>}
         </form>

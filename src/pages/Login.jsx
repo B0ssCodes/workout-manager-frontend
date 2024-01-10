@@ -23,17 +23,16 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className="loginBody">
         
-        <h1 className="display-1 text-center mb-5">Log In</h1>
+        <h1 className="display-1 text-center my-5">Log In</h1>
 
-<div className="container-sm justify-content-center bg-altDark py-4 shadow-color">
+<div className="container-sm justify-content-center bg-altDark py-4 shadow-color rounded">
     <div className="row justify-content-center">
-
         <div className="col-12 col-sm-10 col-md-8 col-lg-6">
 <form className="" onSubmit={handleSubmit}>
 <div className="mb-3">
-  <label for="exampleInputEmail1" className="form-label">Email address</label>
+  <label for="exampleInputEmail1" className="form-label">Email address:</label>
   <input type="email" className="form-control" 
   id="exampleInputEmail1"
    aria-describedby="emailHelp" 
@@ -43,7 +42,7 @@ const Login = () => {
   <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
 </div>
 <div className="mb-3">
-  <label for="exampleInputPassword1" className="form-label">Password</label>
+  <label for="exampleInputPassword1" className="form-label">Password:</label>
   <input type={passwordVisible ? "text" : "password"} 
   className="form-control" 
   id="exampleInputPassword1"
@@ -52,17 +51,19 @@ value={password} />
 </div>
 
 
-<div className="mb-3 form-check">
+<div className="mb-3 form-check d-flex">
   <input type="checkbox" className="form-check-input" id="exampleCheck1" onClick= {togglePasswordVisibility} />
-  <label className="form-check-label" for="exampleCheck1">Show Password</label>
+  <label className="form-check-label ms-2 mt-1" for="exampleCheck1">Show Password</label>
 </div>
 <button type="submit" className="btn btn-primary" disabled={isLoading} >Log In</button>
 {error && <div className = "error">{error}</div>}
+<p className="mt-3">Don't have an account?</p>
+<Link to="/signup" className="btn btn-primary"> Sign up</Link>
 </form>
 </div>
 </div>
 </div>
-</>
+</div>
     )
 }
 export default Login;

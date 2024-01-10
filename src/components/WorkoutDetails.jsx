@@ -37,21 +37,21 @@ const WorkoutDetails = ({ workout }) => {
     }
 
     return (
-        <div className="card my-5" >
+        <div className="card my-5 bg-altDark" >
             
            
-            <div class="card" >
+            <div className="card" >
          
-            <div class="card-body">
-          <h5 class="card-title">{workout.title}</h5>
+            <div className="card-body">
+          <h5 className="card-title">{workout.title}</h5>
          
          </div>
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">Load (kg): {workout.load}</li>
-            <li class="list-group-item">Reps: {workout.reps}</li>
+            <ul className="list-group list-group-flush ">
+            <li className="list-group-item">Load (kg): {workout.load}</li>
+            <li className="list-group-item">Reps: {workout.reps}</li>
             
             </ul>
-            <div class="card-body">
+            <div className="card-body">
                 <span className="card-link me-5">
             <motion.span 
             className= "material-symbols-outlined edit" 
@@ -74,7 +74,7 @@ const WorkoutDetails = ({ workout }) => {
             </span>
   </div>
 </div>
-<div class="card-footer text-body-secondary">
+<div className="card-footer text-body-secondary">
 {formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
   </div>
            

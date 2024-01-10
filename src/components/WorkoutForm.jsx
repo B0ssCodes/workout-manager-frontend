@@ -113,7 +113,7 @@ const WorkoutForm = ({ handleClose }) => {
             value={reps}
             className={emptyFields.includes('reps') ? 'error' : ''}
             />
-            <motion.button>Add Workout</motion.button>
+            <motion.button className="btn btn-primary">Add Workout</motion.button>
             {error && <div className="error">{error}</div>}
         </form>
         </motion.div>

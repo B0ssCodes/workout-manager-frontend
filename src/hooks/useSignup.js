@@ -7,12 +7,12 @@ export const useSignup = () => {
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
  
-    const signup = async (email, password) => {
+    const signup = async (firstName, lastName, email, password) => {
         setIsLoading(true);
         setError(null);
         
         try {
-            const response = await api.post('/api/user/signup', { email, password });
+            const response = await api.post('/api/user/signup', { firstName, lastName, email, password });
 
             if (response.status !== 200) {
                 setIsLoading(false);

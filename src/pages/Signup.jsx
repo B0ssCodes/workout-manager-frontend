@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import './workouts.css'
 
 const Signup = () => {
-
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("")
@@ -37,7 +38,7 @@ const Signup = () => {
             e.preventDefault();
             setSubmitAttempted(true);
             if (passwordsMatch) {
-              await signup(email, password);
+              await signup(firstName, lastName, email, password);
             }
           };
 
@@ -46,48 +47,89 @@ const Signup = () => {
           };
 
     return (
-        <form className="signup" onSubmit={handleSubmit} >
-            <h3>Sign Up</h3>
+      <>
+        
 
-            <label>Email:</label>
-            <input 
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            />
 
-            <label>Password:</label>
-            <div className="password-input">
-            <input 
-            type={passwordVisible ? "text" : "password"}
-            onChange={handlePasswordChange}
-            value={password}
-            />
-            <motion.span className="material-symbols-outlined"
-            onClick= {togglePasswordVisibility}
-            whileHover={{scale: 1.1}}>
-            {passwordVisible ? "visibility" : "visibility_off"}
-            </motion.span>
-            </div>
-            <label>Confirm Password:</label>
-            <div className="password-input">
-            <input 
-            type={passwordVisible ? "text" : "password"}
-            onChange={handlePasswordConfirmChange}
-            value={passwordConfirm}
-            />
-            <motion.span className="material-symbols-outlined hidden"
-            onClick= {togglePasswordVisibility}
-            whileHover={{scale: 1.1}}>
-            {passwordVisible ? "visibility" : "visibility_off"}
-            </motion.span>
-            </div>
-            {!passwordsMatch && <div className="error">Passwords do not match!</div>}
-        <button disabled={isLoading || !passwordsMatch}>Sign Up</button>
-        <div id="signup-text">Already have an account?</div>
-        <Link id="signup-button" to="/login">Log In</Link>
-        {error && <div className = "error">{error}</div>}
-        </form>
+  <div className="loginBody">
+  
+  <h1 className="display-1 text-center my-5">Sign Up</h1>
+
+<div className="container-sm justify-content-center bg-altDark py-4 shadow-color rounded">
+<div className="row justify-content-center">
+  <div className="col-12 col-sm-10 col-md-8 col-lg-6">
+<form  onSubmit={handleSubmit}>
+<div className="mb-3">
+<label htmlFor="firstName"
+className="form-label">First Name:</label>
+
+<input type="text" className="form-control" 
+id="firstName"
+aria-describedby="firstName" 
+value={firstName}
+onChange={(e) => setFirstName(e.target.value)}
+/>
+</div>
+
+<div className="mb-3">
+<label htmlFor="lastName"
+className="form-label">Last Name:</label>
+
+<input type="text" className="form-control" 
+id="lastName"
+aria-describedby="laastName" 
+value={lastName}
+onChange={(e) => setLastName(e.target.value)}
+/>
+<div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+</div>
+
+<div className="mb-3">
+<label htmlFor="email"
+className="form-label">Email address:</label>
+
+<input type="email" className="form-control" 
+id="email"
+aria-describedby="emailHelp" 
+value={email}
+onChange={(e) => setEmail(e.target.value)}
+/>
+<div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+</div>
+<div className="mb-3">
+<label htmlFor="password" className="form-label">Password:</label>
+<input type={passwordVisible ? "text" : "password"} 
+className="form-control" 
+id="password"
+onChange={handlePasswordChange}
+value={password} />
+</div>
+
+<div className="mb-3">
+<label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
+<input type={passwordVisible ? "text" : "password"} 
+className="form-control" 
+id="confirmPassword"
+onChange={handlePasswordConfirmChange}
+value={passwordConfirm} />
+</div>
+
+<div className="mb-3 form-check d-flex">
+<input type="checkbox" className="form-check-input" id="passwordCheck" onClick= {togglePasswordVisibility} />
+<label className="form-check-label ms-2 mt-1" htmlFor="passwordCheck">Show Password</label>
+</div>
+<button type="submit" className="btn btn-primary" disabled={isLoading} >Sign Up</button>
+{!passwordsMatch && <div className="bg-danger p-2 my-3 rounded">Passwords do not match!</div>}
+<p className="mt-3">Already have an account?</p>
+<Link to="/login" className="btn btn-primary">Log In</Link>
+{error && <div className = "error">{error}</div>}
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</>
     )
 }
 export default Signup
