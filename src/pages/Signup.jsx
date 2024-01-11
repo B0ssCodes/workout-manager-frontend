@@ -3,6 +3,8 @@ import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Loading from "../components/Loading";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+
 import './workouts.css'
 
 const Signup = () => {
@@ -14,6 +16,8 @@ const Signup = () => {
     const [passwordsMatch, setPasswordsMatch] = useState(true)
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [submitAttempted, setSubmitAttempted] = useState(false);
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
 
     const {signup, error, isLoading} = useSignup()
 
@@ -39,9 +43,11 @@ const Signup = () => {
             e.preventDefault();
             setSubmitAttempted(true);
             if (passwordsMatch) {
-              await signup(firstName, lastName, email, password);
+                // Get the reCAPTCHA token
+                const recaptchaToken = await executeRecaptcha('signup');
+                await signup(firstName, lastName, email, password, recaptchaToken);
             }
-          };
+        };
 
           const togglePasswordVisibility = () => {
             setPasswordVisible(prevPasswordVisible => !prevPasswordVisible);
