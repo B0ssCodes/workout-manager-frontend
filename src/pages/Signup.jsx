@@ -114,6 +114,10 @@ value={password}
 required/>
 
 </div>
+<div id="passwordHelpBlock" class="form-text">
+  Your password must be 8-20 characters long, contain letters, numbers, capitals, symbols, and must not contain spaces, or emoji.
+</div>
+
 
 <div className="mb-3">
 <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>

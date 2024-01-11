@@ -90,3 +90,9 @@ input.error {
 .shadow-color {
   box-shadow: 0 0 30px 5px #006400; /* DarkGreen */
 }
+
+.bench-workout-box {
+  box-shadow: 0 0 20px 1px #006400; /* DarkGreen */
+  border-radius: 3rem;
+  
+}

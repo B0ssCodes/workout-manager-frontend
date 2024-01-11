@@ -4,10 +4,13 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Navbar from './components/Navbar.jsx';
 
 //pages and components
-import Home from './pages/Home.jsx';
-import WorkoutManager from './pages/WorkoutManager.jsx';
-import Signup from './pages/Signup.jsx';
-import Login from './pages/Login.jsx';
+import Home from './pages/Home';
+import WorkoutManager from './pages/WorkoutManager';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import BenchProgram from './pages/BenchProgram';
+import Dashboard from './pages/Dashboard';
+import PRCalculator from './pages/PRCalculator';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -23,9 +26,12 @@ function AppRoutes({ user }) {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/bench-program" element={user ? <BenchProgram /> : <Navigate to="/login" />} />
+      <Route path="/pr-calculator" element={user ? <PRCalculator /> : <Navigate to="/login" />} />
+      <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
       <Route path="/workout-manager" element={user ? <WorkoutManager /> : <Navigate to="/login" />} />
-      <Route path="/login" element={!user ? <Login /> : <Navigate to="/workout-manager" />} />
-      <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/workout-manager" />} />
+      <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
+      <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/dashboord" />} />
     </Routes>
   );
 }

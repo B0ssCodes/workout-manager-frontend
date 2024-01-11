@@ -5,6 +5,9 @@ $primary : #21BC21;
 
 $custom-theme-colors : (
     "altDark": #111,
+    "altLight": #F5F5F5,
+    "altGrey": #696969
+
 );
 
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
