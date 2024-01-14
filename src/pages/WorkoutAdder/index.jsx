@@ -5,6 +5,13 @@ import api from '../../api'; // Import the axios instance
 import { useAuthContext } from "../../hooks/useAuthContext";
 import WorkoutTitle from "./WorkoutTitle";
 
+import ChestExercises from './Chest/ChestExercises'
+import BackExercises from './Back/BackExercises'
+import ShouldersExercises from './Shoulders/ShouldersExercises'
+import BicepsExercises from './Biceps/BicepsExercises'
+import TricepsExercises from './Triceps/TricepsExercises'
+import LegsExercises from './Legs/LegsExercises'
+
 
 
 
@@ -69,7 +76,7 @@ if (toastTrigger) {
                 }
             })
             console.log(response.data);
-            window.location.href = '/dashboard';
+            window.location.href = '/workout-manager';
         } catch (error) {
             console.error(error);
         }
@@ -88,68 +95,6 @@ if (toastTrigger) {
         });
     }
     
-    const chestExercises = ChestData.map((exercise) => {
-        return (
-            <>
-            <div className="col-6 col-md-4 col-lg-3" key={exercise.key}>
-                <div className="card mt-3 rounded-5 text-center clickable-card"  
-                onClick={() => handleExerciseClick(exercise.key)}>
-                    <div className="mx-auto">
-                        <img src={exercise.image} className="img-fluid rounded-5" alt="..." />
-                    </div>
-                    <div className="card-body">
-                        <h5 className="card-title">{exercise.title}</h5>
-                        {selectedExercise === exercise.key && (
-                            <form onSubmit={(event) => handleExerciseSubmit(event, exercise.title, formData[exercise.key])}>
-                                {[...Array(numSets)].map((_, i) => (
-                                    <div key={i}>
-                                        <h6 className="border-bottom">{`Set ${i + 1}`}</h6>
-                                        <label className="form-label">
-                                            {`Weight:`}
-                                            <input required
-    className="form-control"
-    type="number" 
-    name={`set${i + 1}Weight`} 
-    onChange={(e) => handleSetChange(exercise.key, `set${i + 1}`, 'load', e.target.value)}
-/>
-                                        </label>
-                                        <label  className="form-label">
-    {`Reps:`}
-    <input required
-        className="form-control"
-        type="number" 
-        name={`set${i + 1}Reps`} 
-        onChange={(e) => handleSetChange(exercise.key, `set${i + 1}`, 'reps', e.target.value)}
-    />
-</label>
-                                    </div>
-                                ))}
-                                <button type="button" className="btn btn-primary m-1" onClick={handleAddSet}>+</button>
-                                <button type="button" className="btn btn-primary m-1" onClick={handleRemoveSet}>-</button>
-                                <button type="submit" className="btn btn-primary" id="liveToastBtn">Submit Exercise</button>
-                            </form>
-                        )}
-                    </div>
-                </div>
-                
-            </div>
-
-            <div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="..."/>
-      <strong class="me-auto">Exercise Added!</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      {exercise.title} has been added to your workout!
-    </div>
-  </div>
-</div>
-            </>
-            
-        )
-    })
     return (
          <>
 
@@ -160,58 +105,65 @@ if (toastTrigger) {
             <h2 className="display-6 text-center bg-altDark mb-5">Which exercises did you do?</h2>
             
             
-            <section id="chest">
-                <h2 className="display-6 border-bottom mb-4">Chest</h2>
-                <div className="container"> 
-                <div className="row">
-                    {chestExercises}
-                    <button onClick={handleWorkoutSubmit}>Final Submit</button>
-                    </div>
-                
-                
-                </div>
-            </section>
+            <ChestExercises handleExerciseClick={handleExerciseClick}
+                            selectedExercise={selectedExercise}
+                            handleSetChange={handleSetChange}
+                            handleAddSet={handleAddSet}
+                            handleRemoveSet={handleRemoveSet}
+                            numSets={numSets}
+                            formData={formData}
+                            handleExerciseSubmit={handleExerciseSubmit}/>
 
-            <section id="back">
-                <h2 className="display-6 border-bottom">Back</h2>
-                <div className="container"> 
+            <BackExercises handleExerciseClick={handleExerciseClick}
+                            selectedExercise={selectedExercise}
+                            handleSetChange={handleSetChange}
+                            handleAddSet={handleAddSet}
+                            handleRemoveSet={handleRemoveSet}
+                            numSets={numSets}
+                            formData={formData}
+                            handleExerciseSubmit={handleExerciseSubmit}/>
 
+            
 
-                </div>
-            </section>
+            <ShouldersExercises handleExerciseClick={handleExerciseClick}
+                            selectedExercise={selectedExercise}
+                            handleSetChange={handleSetChange}
+                            handleAddSet={handleAddSet}
+                            handleRemoveSet={handleRemoveSet}
+                            numSets={numSets}
+                            formData={formData}
+                            handleExerciseSubmit={handleExerciseSubmit}/>
 
-            <section id="shoulders">
-                <h2 className="display-6 border-bottom">Shoulders</h2>
-                <div className="container">
-
-
-                </div>
-            </section>
-
-            <section id="biceps">
-                <h2 className="display-6 border-bottom">Biceps</h2>
-                <div className="container"> 
-
-
-                </div>
-            </section>
-
-            <section id="triceps">
-                <h2 className="display-6 border-bottom">Triceps</h2>
-                <div className="container"> 
+            <BicepsExercises handleExerciseClick={handleExerciseClick}
+                            selectedExercise={selectedExercise}
+                            handleSetChange={handleSetChange}
+                            handleAddSet={handleAddSet}
+                            handleRemoveSet={handleRemoveSet}
+                            numSets={numSets}
+                            formData={formData}
+                            handleExerciseSubmit={handleExerciseSubmit}/>   
 
 
-                </div>
-            </section>
+            <TricepsExercises handleExerciseClick={handleExerciseClick}
+                            selectedExercise={selectedExercise}
+                            handleSetChange={handleSetChange}
+                            handleAddSet={handleAddSet}
+                            handleRemoveSet={handleRemoveSet}
+                            numSets={numSets}
+                            formData={formData}
+                            handleExerciseSubmit={handleExerciseSubmit}/> 
 
-            <section id="legs">
-                <h2 className="display-6 border-bottom">Legs</h2>
-                <div className="container"> 
+            <LegsExercises handleExerciseClick={handleExerciseClick}
+                            selectedExercise={selectedExercise}
+                            handleSetChange={handleSetChange}
+                            handleAddSet={handleAddSet}
+                            handleRemoveSet={handleRemoveSet}
+                            numSets={numSets}
+                            formData={formData}
+                            handleExerciseSubmit={handleExerciseSubmit}/> 
 
 
-                </div>
-            </section>
-
+            <button onClick={handleWorkoutSubmit} className="btn btn-primary mt-5 margin-top d-flex justify-content-center">Submit Workout</button>
 
          </div>
          </>

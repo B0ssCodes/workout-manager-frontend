@@ -1,7 +1,7 @@
-import ChestData from "./ChestData"
-function ChestExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
+import ShouldersData from "./ShouldersData"
+function ShouldersExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
 
-const chestExercises = ChestData.map((exercise) => {
+const shouldersExercises = ShouldersData.map((exercise) => {
 return(
     <>
             <div className="col-6 col-md-4 col-lg-3" key={exercise.key}>
@@ -66,15 +66,15 @@ return(
 )})
                             
     return (
-        <section id="chest">
-            <h2 className="display-6 border-bottom mb-4">Chest</h2>
+        <section id="shoulders">
+            <h2 className="display-6 border-bottom mb-4">Shoulders</h2>
                 <div className="container"> 
                     <div className="row">
-                         {chestExercises} 
+                         {shouldersExercises} 
                     </div>
                 </div>
          </section>
         )
         }
 
-export default ChestExercises
+export default ShouldersExercises
