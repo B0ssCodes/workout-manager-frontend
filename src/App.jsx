@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react';
 import { useAuthContext } from './hooks/useAuthContext';
-import Navbar from './components/Navbar.jsx';
+import Navigation from './components/Navigation.jsx';
 
 //pages and components
 import Home from './pages/Home';
@@ -44,7 +44,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        <Navigation />
         <ScrollToTop />
         <div className="pages">
           <AppRoutes user={user} />

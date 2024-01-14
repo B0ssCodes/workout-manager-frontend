@@ -5,7 +5,7 @@ const chestExercises = ChestData.map((exercise) => {
 return(
     <>
             <div className="col-6 col-md-4 col-lg-3" key={exercise.key}>
-                <div className="card mt-3 rounded-5 text-center clickable-card"  
+                <div className="card mt-3 rounded-5 text-center clickable-card bg-altDark"  
                 onClick={() => handleExerciseClick(exercise.key)}>
                     <div className="mx-auto">
                         <img src={exercise.image} className="img-fluid rounded-5" alt="..." />
@@ -52,7 +52,6 @@ return(
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
              <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                  <img src="..." class="rounded me-2" alt="..."/>
                      <strong class="me-auto">Exercise Added!</strong>
                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                             </div>

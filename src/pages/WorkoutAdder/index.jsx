@@ -12,6 +12,7 @@ import BicepsExercises from './Biceps/BicepsExercises'
 import TricepsExercises from './Triceps/TricepsExercises'
 import LegsExercises from './Legs/LegsExercises'
 
+import { Toast } from 'bootstrap';
 
 
 
@@ -58,7 +59,7 @@ const WorkoutAdder = () => {
 const toastLiveExample = document.getElementById('liveToast')
 
 if (toastTrigger) {
-  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample)
   toastTrigger.addEventListener('click', () => {
     toastBootstrap.show()
   })
