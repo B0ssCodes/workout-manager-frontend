@@ -31,10 +31,11 @@ const PRCalculator = () => {
     return (
         <>
         <h1 className="display-1 text-center mb-5 border-bottom">PR Calculator</h1>
-    
+        <div className="container-md">
         <InputForm changeRender={changeRender} handleChange={handleChange} PR={PR} sendPR={sendPR} reps={reps} handleRepsChange={handleRepsChange} />
         {render &&(<PRMaker PRtoMaker={PRtoMaker} render={render}
                 repsToMaker={repsToMaker} />)}
+                </div>
         </>
     )
 }

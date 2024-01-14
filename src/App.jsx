@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import BenchProgram from './pages/BenchProgram';
 import Dashboard from './pages/Dashboard';
 import PRCalculator from './pages/PRCalculator';
+import WorkoutAdder from './pages/WorkoutAdder';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -30,6 +31,7 @@ function AppRoutes({ user }) {
       <Route path="/pr-calculator" element={user ? <PRCalculator /> : <Navigate to="/login" />} />
       <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
       <Route path="/workout-manager" element={user ? <WorkoutManager /> : <Navigate to="/login" />} />
+      <Route path="/workout-adder" element={user ? <WorkoutAdder /> : <Navigate to="/login" />} />
       <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
       <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/dashboord" />} />
     </Routes>

@@ -4,7 +4,7 @@ const PRMaker = ({PRtoMaker, repsToMaker}) => {
     var personalRecordNoDecimals = (Math.trunc(personalRecord))
 
     return (
-         <div className="container bg-altDark p-5 m-5 text-center rounded">
+         <div className=" bg-altDark p-5 m-5 text-center rounded">
         <h1>Your estimated PR is: {personalRecordNoDecimals} </h1>
      </div>
      )  

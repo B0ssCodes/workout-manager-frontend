@@ -1,59 +1,65 @@
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { motion } from "framer-motion";
-import  Backdrop  from './Backdrop';
+import Backdrop from './Backdrop';
 import './components.css'
 
 import api from '../api'; // Import the axios instance
 
-const EditForm = ({ editOpen, handleClose, workout }) => {
+const EditForm = ({ editOpen, handleClose, exercise }) => {
     const { dispatch } = useWorkoutsContext()
     const { user } = useAuthContext()
 
-    const [title, setTitle] = useState(workout.title)
-    const [load, setLoad] = useState(workout.load)
-    const [reps, setReps] = useState(workout.reps)
+    const [exerciseTitle, setExerciseTitle] = useState(exercise ? exercise.title : '')
+    const [sets, setSets] = useState(exercise ? exercise.sets : [])
     const [error, setError] = useState('')
-    const [emptyFields, setEmptyFields] = useState([])
+
+    useEffect(() => {
+        if (exercise) {
+            setExerciseTitle(exercise.title)
+            setSets(exercise.sets)
+        }
+    }, [exercise])
+
+    const handleSetChange = (setIndex, field, value) => {
+        const newSets = [...sets]
+        newSets[setIndex][field] = value
+        setSets(newSets)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-    
+
         if(!user){
-            setError("You must be logged in to edit a workout")
+            setError("You must be logged in to edit an exercise")
             return
         }
-        const workoutToUpdate = { _id: workout._id, title, load, reps }    
+
+        const exerciseToUpdate = { _id: exercise._id, title: exerciseTitle, sets }    
+
         try {
-            const response = await api.patch(`/api/workouts/${workoutToUpdate._id}`, workoutToUpdate, {
+            const response = await api.patch(`/api/exercises/${exerciseToUpdate._id}`, exerciseToUpdate, {
                 headers: {
                   "Content-Type": "application/json",
                   'Authorization': `Bearer ${user.token}`
                 }
               })
-            setTitle('')
-            setLoad('')
-            setReps('')
+
             setError(null)
-            setEmptyFields([])
-            console.log("Workout Edited!")
-            dispatch({ type: 'UPDATE_WORKOUT', payload: response.data })
+            console.log("Exercise Edited!")
+            dispatch({ type: 'UPDATE_EXERCISE', payload: response.data })
             handleClose()
 
         } catch (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 setError(error.response.data.error)
-                setEmptyFields(error.response.data.emptyFields)
             } else {
-                // Something happened in setting up the request that triggered an Error
                 setError(error.message);
             }
         }
     }
+
     const dropIn = {
         hidden: {
             y: '-100vh',
@@ -74,8 +80,8 @@ const EditForm = ({ editOpen, handleClose, workout }) => {
             opacity: 0,
         }
     }
+
     return (
-        <>
         <Backdrop onClick={handleClose} >
             <motion.div 
             onClick={(e) => e.stopPropagation()}
@@ -83,47 +89,47 @@ const EditForm = ({ editOpen, handleClose, workout }) => {
             variants={dropIn}
             initial="hidden"
             animate="visible"
-            
->
-        <form className="create-form" onSubmit={handleSubmit}>
-            <h2 className="display-4">Edit a Workout</h2>
-            <label className="form-label">Exercise Title:</label>
-            <motion.input 
-            type="text"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-            className="form-control"  
-            required />
-            
+            >
+            <form className="create-form" onSubmit={handleSubmit}>
+                <h2 className="display-4">Edit an Exercise</h2>
+                <label className="form-label">Exercise Title:</label>
+                <motion.input 
+                type="text"
+                onChange={(e) => setExerciseTitle(e.target.value)}
+                value={exerciseTitle}
+                className="form-control"  
+                required />
 
-            
-            <label className="form-label">Load (in kg):</label>
-            <input 
-            type="number"
-            onChange={(e) => setLoad(e.target.value)}
-            value={load}
-            className="form-control"    
-            required/>
+                {sets.map((set, setIndex) => (
+                    <div key={setIndex}>
+                        <label className="form-label">Load (in kg):</label>
+                        <input 
+                        type="number"
+                        onChange={(e) => handleSetChange(setIndex, 'load', e.target.value)}
+                        value={set.load}
+                        className="form-control"    
+                        required/>
 
-           
-            <label className="form-label">Reps:</label>
-            <input 
-            type="number"
-            onChange={(e) => setReps(e.target.value)}
-            value={reps}
-            className="form-control"
-            required/>
-            <motion.button
-            whileHover={{ scale: 1.05, transition: {duration: 0.3} }}
-            whileTap={{ scale: 0.9 }}
-            className="btn btn-primary mt-2"
-            style={{ transform: 'scale(1)' }}
-            >Edit Workout</motion.button>
-            {error && <div className="error">{error}</div>}
-        </form>
-        </motion.div>
+                        <label className="form-label">Reps:</label>
+                        <input 
+                        type="number"
+                        onChange={(e) => handleSetChange(setIndex, 'reps', e.target.value)}
+                        value={set.reps}
+                        className="form-control"
+                        required/>
+                    </div>
+                ))}
+
+                <motion.button
+                whileHover={{ scale: 1.05, transition: {duration: 0.3} }}
+                whileTap={{ scale: 0.9 }}
+                className="btn btn-primary mt-2"
+                style={{ transform: 'scale(1)' }}
+                >Edit Exercise</motion.button>
+                {error && <div className="error">{error}</div>}
+            </form>
+            </motion.div>
         </Backdrop>
-        </>
     )
 }
 
