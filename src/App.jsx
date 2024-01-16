@@ -33,7 +33,7 @@ function AppRoutes({ user }) {
       <Route path="/workout-manager" element={user ? <WorkoutManager /> : <Navigate to="/login" />} />
       <Route path="/workout-adder" element={user ? <WorkoutAdder /> : <Navigate to="/login" />} />
       <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
-      <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/dashboord" />} />
+      <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/dashboard" />} />
     </Routes>
   );
 }
