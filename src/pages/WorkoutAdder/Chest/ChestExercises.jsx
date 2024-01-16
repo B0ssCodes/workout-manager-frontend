@@ -1,21 +1,27 @@
 import ChestData from "./ChestData"
 import { Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js'
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 
 function ChestExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
 
-    const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('liveToast')
+    const [toastId, setToastId] = useState(null);
 
-if (toastTrigger) {
-  const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample)
-  toastTrigger.addEventListener('click', () => {
-    toastBootstrap.show()
-  })
-}
+    useEffect(() => {
+        const toastLiveExample = document.getElementById(toastId);
+        if (toastLiveExample) {
+            const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample);
+            toastBootstrap.show();
+        }
+    }, [toastId]);
+
+    const handleClick = (currentToastId) => {
+        setToastId(currentToastId);
+    };
 
 const chestExercises = ChestData.map((exercise) => {
+    const currentToastId = `liveToast${exercise.key}`;
+
 return(
     <Fragment key={exercise.key}>
             <div className="col-6 col-md-4 col-lg-3" key={exercise.key}>
@@ -55,7 +61,7 @@ return(
                                 ))}
                                 <button type="button" className="btn btn-primary m-1" onClick={handleAddSet}>+</button>
                                 <button type="button" className="btn btn-primary m-1" onClick={handleRemoveSet}>-</button>
-                                <button type="submit" className="btn btn-primary" id="liveToastBtn">Submit Exercise</button>
+                                <button type="submit" className="btn btn-primary" id="liveToastBtn" onClick={() => handleClick(currentToastId)}>Submit Exercise</button>
                             </form>
                         )}
                     </div>
@@ -64,7 +70,7 @@ return(
             </div>
 
             <div className="toast-container position-fixed bottom-0 end-0 p-3">
-             <div id="liveToast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+             <div id={currentToastId} className="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div className="toast-header">
                      <strong className="me-auto">Exercise Added!</strong>
                          <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

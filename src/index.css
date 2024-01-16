@@ -1,3 +1,11 @@
-/* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
+/* Override Bootstrap's body background color */
+body {
+    background: linear-gradient(to right top, #111111, #111111, #111112, #111212, #111212, #101413, #0f1613, #111711, #111a11, #121c11, #111f11, #112211);
+}
+
+.pages{
+    min-height: 100vh;
+    margin-top: 1em;
+}

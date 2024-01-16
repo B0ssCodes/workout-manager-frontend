@@ -11,7 +11,7 @@ const Navigation = () => {
     }
 
     return (
-        <Navbar bg="altDark" expand="lg" className="rounded mb-3 p-4">
+        <Navbar bg="altDark" expand="lg" className="rounded p-4">
             <Navbar.Brand as={Link} to="/">Boss Workouts</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

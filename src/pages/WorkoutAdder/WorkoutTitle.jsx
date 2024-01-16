@@ -50,8 +50,8 @@ const WorkoutTitle = ({title, setTitle, closeBackdrop} ) => {
                         animate="visible"
                     >
                         <form className="create-form" onSubmit={handleSubmit}>
-                            <h2 className="display-4">Add a New Workout</h2>
-                            <label>Exercise Title:</label>
+                            <h2 className="display-5">Add a New Workout</h2>
+                            <label className="display-6 m-0 p-0">Workout Title:</label>
                             <motion.input 
                                 type="text"
                                 onChange={handleTitleChange}

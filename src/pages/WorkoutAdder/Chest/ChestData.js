@@ -1,13 +1,13 @@
 export default [
     { 
         title: "Barbell Bench Press",
-        image: "/chest-test-pic.jpg",
+        image: "/bench-press.jpeg",
         key: "1"
     },
 
     { 
         title: "Incline Barbell Bench Press",
-        image: "/chest-test-pic.jpg",
+        image: "/incline-bench-press.jpeg",
         key: "2"
     },
 

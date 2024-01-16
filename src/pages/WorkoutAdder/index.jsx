@@ -96,7 +96,9 @@ const WorkoutAdder = () => {
 
         {titleFormOpen && <WorkoutTitle title={workoutTitle} setTitle={setWorkoutTitle} closeBackdrop={closeBackdrop} />}
          <h1 className="display-1 text-center mb-4 border-bottom">Workout Adder</h1>
-         <div className="container">
+         <div className="d-flex flex-column vh-100 justify-content-between mx-auto" style={{ maxWidth: '1200px' }}>
+
+
             <h2 className="display-6 text-center bg-altDark mb-5">Which exercises did you do?</h2>
             
             
@@ -158,9 +160,14 @@ const WorkoutAdder = () => {
                             handleExerciseSubmit={handleExerciseSubmit}/> 
 
 
-            <button onClick={handleWorkoutSubmit} className="btn btn-primary mt-5 margin-top d-flex justify-content-center">Submit Workout</button>
 
-         </div>
+    
+<div className="position-fixed bottom-0 w-100 d-flex justify-content-center">
+    <div className="d-grid gap-2" style={{ maxWidth: '1200px' }}>
+        <div onClick={handleWorkoutSubmit} className="btn btn-primary mb-3 p-2" style={{ cursor: 'pointer', minWidth: "400px" }}><p className="lead mb-0">Submit Workout</p></div>
+    </div>
+</div>
+</div>
          </>
     )
 }
