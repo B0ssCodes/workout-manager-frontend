@@ -18,7 +18,6 @@ const Signup = () => {
     const [submitAttempted, setSubmitAttempted] = useState(false);
     const { executeRecaptcha } = useGoogleReCaptcha();
 
-
     const {signup, error, isLoading} = useSignup()
 
    const handlePasswordChange = (e) => {
@@ -56,7 +55,6 @@ const Signup = () => {
     return (
       <>
       {isLoading && <Loading />}
-            <useGoogleReCaptcha onVerify={token => console.log(token)} action='signup' />
   <div className="container-sm">
   
   <h1 className="display-1 text-center my-5">Sign Up</h1>
@@ -127,7 +125,7 @@ className="form-control"
 id="confirmPassword"
 onChange={handlePasswordConfirmChange}
 value={passwordConfirm} 
-requred/>
+required/>
 </div>
 
 <div className="mb-3 form-check d-flex">

@@ -4,7 +4,7 @@ import './workoutAdder.css'
 import api from '../../api'; // Import the axios instance
 import { useAuthContext } from "../../hooks/useAuthContext";
 import WorkoutTitle from "./WorkoutTitle";
-
+import { useNavigate } from 'react-router-dom';
 import ChestExercises from './Chest/ChestExercises'
 import BackExercises from './Back/BackExercises'
 import ShouldersExercises from './Shoulders/ShouldersExercises'
@@ -17,6 +17,8 @@ import { Toast } from 'bootstrap';
 
 
 const WorkoutAdder = () => {
+
+    const navigate = useNavigate();
 
     const [chosenSections, setChosenSections] = useState("chest");
     const [selectedExercise, setSelectedExercise] = useState(null);
@@ -69,7 +71,7 @@ const WorkoutAdder = () => {
                 }
             })
             console.log(response.data);
-            window.location.href = '/workout-manager';
+            navigate('/workout-manager');
         } catch (error) {
             console.error(error);
         }

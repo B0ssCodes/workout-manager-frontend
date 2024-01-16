@@ -1,5 +1,7 @@
 import TricepsData from "./TricepsData"
 import { Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js'
+import { Fragment } from 'react';
+
 
 
 function TricepsExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
@@ -17,7 +19,7 @@ if (toastTrigger) {
 
 const tricepsExercises = TricepsData.map((exercise) => {
 return(
-    <>
+    <Fragment key={exercise.key}>
             <div className="col-6 col-md-4 col-lg-3" key={exercise.key}>
                 <div className="card mt-3 rounded-5 text-center clickable-card bg-altDark"  
                 onClick={() => handleExerciseClick(exercise.key)}>
@@ -63,18 +65,18 @@ return(
                 
             </div>
 
-            <div class="toast-container position-fixed bottom-0 end-0 p-3">
-             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                     <strong class="me-auto">Exercise Added!</strong>
-                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+             <div id="liveToast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div className="toast-header">
+                     <strong className="me-auto">Exercise Added!</strong>
+                         <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                             </div>
-                                <div class="toast-body">
+                                <div className="toast-body">
                                  {exercise.title} has been added to your workout!
                                     </div>
                                     </div>
                                      </div>
-                                         </>
+                                         </Fragment>
 
 )})
                             
