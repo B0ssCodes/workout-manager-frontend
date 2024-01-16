@@ -1,6 +1,19 @@
 import BicepsData from "./BicepsData"
+import { Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js'
+
 function BicepsExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
 
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+    
+    if (toastTrigger) {
+      const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample)
+      toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+      })
+    }
+
+    
 const bicepsExercises = BicepsData.map((exercise) => {
 return(
     <>

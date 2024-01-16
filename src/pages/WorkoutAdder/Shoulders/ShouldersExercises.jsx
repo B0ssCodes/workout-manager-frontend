@@ -1,6 +1,19 @@
 import ShouldersData from "./ShouldersData"
+import { Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js'
+
 function ShouldersExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
 
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+    
+    if (toastTrigger) {
+      const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample)
+      toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+      })
+    }
+
+    
 const shouldersExercises = ShouldersData.map((exercise) => {
 return(
     <>

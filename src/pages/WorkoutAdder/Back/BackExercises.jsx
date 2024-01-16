@@ -1,6 +1,18 @@
 import BackData from "./BackData"
+import { Toast } from 'bootstrap/dist/js/bootstrap.esm.min.js'
 function BackExercises({ handleExerciseClick, selectedExercise, handleSetChange, handleAddSet, handleRemoveSet, numSets, formData, handleExerciseSubmit}) {
 
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+    
+    if (toastTrigger) {
+      const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample)
+      toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+      })
+    }
+
+    
 const backExercises = BackData.map((exercise) => {
 return(
     <>

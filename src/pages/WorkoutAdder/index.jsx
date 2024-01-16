@@ -55,15 +55,7 @@ const WorkoutAdder = () => {
         setExercises([...exercises, { title: exerciseTitle, sets: setsArray }]);
     }
 
-    const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('liveToast')
-
-if (toastTrigger) {
-  const toastBootstrap = Toast.getOrCreateInstance(toastLiveExample)
-  toastTrigger.addEventListener('click', () => {
-    toastBootstrap.show()
-  })
-}
+    
 
 
 

@@ -55,7 +55,8 @@ const Signup = () => {
 
     return (
       <>
-      {isLoading &&<Loading />}
+      {isLoading && <Loading />}
+            <useGoogleReCaptcha onVerify={token => console.log(token)} action='signup' />
   <div className="container-sm">
   
   <h1 className="display-1 text-center my-5">Sign Up</h1>
